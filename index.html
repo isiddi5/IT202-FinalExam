@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Coding Challenge</title>
+  <link href="https://unpkg.com/material-components-web@1.0.0/dist/material-components-web.min.css" rel="stylesheet" type="text/css" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+   crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+   crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+  <style>
+    .content {
+      margin: auto;
+  width: 60%;
+
+  padding: 10px;
+      display: none;
+    }
+        
+        .template {
+      display: none;
+    }
+    
+     /* Set the size of the div element that contains the map */
+      #map {
+        height: 500px;  /* The height is 400 pixels */
+        width: 100%;  /* The width is the width of the web page */
+       }
+    
+    ..nav-link:hower{
+      
+      
+      color: white;
+      
+    }
+
+    .navbar-brand{
+font-family: "Cursive";
+    }
+
+    .haha{
+      font-size: 15px;
+      //font-family: "Times New Roman", Times, serif;
+      color: #6200ee;
+    }
+    
+    #list {
+      width: 100%;
+      height: 100%;
+      }
+    
+    #myBtn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 4px;
+}
+
+#myBtn:active {
+  color: #6200ee;
+}
+
+
+#myBtn:hover {
+  background-color: #555;
+}
+
+.navbar {
+  background-color: black;
+  box-shadow: 0 2px 4px rgba(0,0,0,.5);}
+
+
+bg-dark {
+  background-color: black;
+  //box-shadow: 0 2px 4px rgba(0,0,0,.5);
+}
+    
+    
+        
+  </style>
+
+</head>
+
+<body>
+  <!-- This is the navigation bar used on the app, it contains 4 tabs linking to different pages -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Coding Challenge</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#search" role="tab" aria-controls="home" aria-selected="true">Search</a>
+  </li>
+  <!--< li class="nav-item">
+    <a class="nav-link" id="adv-tab" data-toggle="tab" href="#advance" role="tab" aria-controls="adv" aria-selected="false">Advance Search</a>
+  </li> -->
+  <li class="nav-item">
+    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#list" role="tab" aria-controls="profile" aria-selected="false">List</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#mapper" role="tab" aria-controls="contact" aria-selected="false">Google Map</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="about-tab" data-toggle="tab" href="#abouts" role="tab" aria-controls="about" aria-selected="false">About Us</a>
+  </li>
+</ul>
+    </div>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"></div>
+  <div class="tab-pane fade" id="adv" role="tabpanel" aria-labelledby="adv-tab"></div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab"></div>
+  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab"></div>
+  <div class="tab-pane fade" id="about" role="tabpanel" aria-labelledby="about-tab"></div>
+  </div>
+    </nav>
+
+    <!-- **** SEARCH PAGE -->
+  <div class="content" id="search">
+    <div class="input-group" style="18">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">Press Search</span>
+      </div>
+        
+          <button class="mdc-button">
+            <span class="mdc-button__label" id="searching">Search</span>
+          </button>
+          
+  </div>
+  <!-- The template for the results for regular search -->
+  <div class="content">
+  <div id="cards" ></div>
+
+  <div class="card template col-sm-6" align="center">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+      <h6 class="card-subtitle1 mb-2 text-muted">Card subtitle</h6>
+      <h6 class="card-subtitle2 mb-2 text-muted">Card subtitle</h6>
+      <h6 class="card-subtitle3 mb-2 text-muted">Card subtitle</h6>
+      <!-- Trigger the modal with a button -->
+      <a href="#" data-toggle="modal" data-target="#myModal" class="card-link">More Information</a>
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Information</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <div class="modaldes1">col</div>
+              <br>
+              <div class="modaldes5">col</div>
+              <br>
+              <div class="row">
+                <div class="col modaldes2">col</div>
+                <div class="col modaldes3">col</div>
+                <div class="col modaldes4">col</div>
+              </div>
+            </div>
+            <div class="modal-footer">
+             <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      
+      <a href="#" class="card-link2">Website Link</a>
+    </div>
+  </div>
+    </div>
+  </div>
+
+  <!-- ******* ADVANCED PAGE-->
+  <div class="content" id="advance">
+    <div class="input-group" style="18">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">Enter Zip Code</span>
+      </div>
+        <input type="text" id="zip_code" value="60620"class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+          <button class="mdc-button">
+            <span class="mdc-button__label" id="advancing">Advance Search</span>
+          </button>
+  </div>
+  <!-- The template for the results for advance search -->
+  <div class="content">
+  <div id="carders" ></div>
+
+  <div class="card templater col-sm-6" align="center">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+      <h6 class="card-subtitle1 mb-2 text-muted">Card subtitle</h6>
+      <h6 class="card-subtitle2 mb-2 text-muted">Card subtitle</h6>
+      <h6 class="card-subtitle3 mb-2 text-muted">Card subtitle</h6>
+      <!-- Trigger the modal with a button -->
+      <a href="#" data-toggle="modal" data-target="#myModals" class="card-link">More Information</a>
+
+      <!-- Modal -->
+      <div class="modal fade" id="myModals" role="dialog">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Information</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <div class="modaldes1">col</div>
+              <br>
+              <div class="modaldes5">col</div>
+              <br>
+              <div class="row">
+                <div class="col modaldes2">col</div>
+                <div class="col modaldes3">col</div>
+                <div class="col modaldes4">col</div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      
+      <a href="#" class="card-link2">Website Link</a>
+    </div>
+  </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+
+  </script>
+
+  <div class="content" id="list">
+    
+    List page
+    
+  </div>
+  <div class="content" id="mapper">
+    Map page
+    
+    <h3> Grafetti Locations</h3>
+    <!--The div element for the map -->
+    <div id="map" onclick="getLocation()"></div>
+
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+  </div>
+
+  <script >
+    
+    var url;
+    var data;
+    var test;
+
+
+  //insert function here
+    var x = document.getElementById('map'); 
+
+     
+    
+    //var address = {lat: coords.latitude, lng: coords.longitude}
+    
+     function initMap() {
+          // The location of Chicago
+          var chicago = {lat: 41.8781, lng: -87.6298};
+          // The map, centered at Chicago
+          var map = new google.maps.Map(
+              document.getElementById('map'), {zoom: 11, center: chicago});
+
+          //Gathers geolocation and saves them in a variable
+          if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            //displays the current location on google map
+  var marker = new google.maps.Marker({position: pos, map: map});
+
+var infowindow = new google.maps.InfoWindow({
+        content: "Current Location"
+      });
+
+      infowindow.open(map, marker);
+
+      marker.addListener('click', function() {
+        infowindow.open(map, marker);
+        
+        counter++;
+        console.log(counter);
+        
+        if (counter >= 2){
+          infowindow.close(map, marker);
+          counter = 0;
+        }
+
+      });
+
+          }, function() {
+            
+          });
+        }
+
+          // var marker = new google.maps.Marker({position: chicago, map: map});
+
+    $(document).ready(function(){
+
+      var endpoint = "https://data.cityofchicago.org/resource/9rg7-mz9y.json?$limit=50";
+
+
+      $("#searching").on("click", function() {
+        // clear the display
+        $("#cards").empty();
+        $("#list").empty();
+        var searchString = $("#zip").val();
+        console.log(searchString);
+        
+        var url = endpoint 
+        console.log(url);
+
+      $.get(url, function(response) {
+          console.log(response);
+
+          $("#search").append("<h3>Your query returned " + response.length + " records.</h3>");
+
+
+          var data = response;
+
+          createMarkers(map, data );
+
+          $.each(data, function(i,v){
+            //console.log(i,v);
+
+            // clone card
+            var clone = $(".template").clone();
+            // update values
+            clone.find(".card-title").text(v.district_name);
+
+
+            clone.find(".card-subtitle").text(v.address);
+
+            //clone.find(".card-subtitle1").text(v.website);
+
+            clone.find(".card-link2").text(v.website);
+
+            clone.find(".card-subtitle1").text(v.phone);
+
+            // clone.find(".card-subtitle2").text(v.phone);
+
+            // clone.find(".card-subtitle3").html(v.location);
+
+            // clone.find(".modaldes1").text("Hours: " + v.hours);
+            
+            // clone.find(".modaldes2").text("Internet: " + v.internet);
+
+            // clone.find(".modaldes3").text("Wifi: " + v.wifi);
+
+            // clone.find(".modaldes4").text("Training: " + v.training);
+
+            // clone.find(".modaldes5").text("Appointment: " + v.appointment);
+
+            // clone.find(".card-link2").attr("href", v.website);
+
+            /*
+            clone.find(".card-subtitle2").text(v.what_type_of_surface_is_the_graffiti_on_);
+
+            clone.find(".card-subtitle3").text(v.creation_date);
+
+
+            clone.find(".card-subtitle5").text(v.completion_date);*/
+            
+            if (v.violations) {
+              //clone.find(".card-text").text(v.violations);
+            } else {
+              clone.find(".card-text").text("")
+            }
+            
+            
+
+
+            clone.removeClass("template")
+
+
+            // insert into DOM
+            $("#list").append(clone);
+
+          });
+
+
+      })
+
+      });
+
+
+    });
+       
+       
+       
+     }
+
+     
+    
+    function createMarkers (map, data) {
+    console.log(data);
+
+
+    
+    $.each(data, function(i,v) {
+      
+      var counter = 0;
+      var lati = v.latitude;
+      var longi = v.longitude;
+
+
+      var location = {lat: parseFloat(v.latitude), lng: parseFloat(v.longitude) }
+
+      
+      var completecolor = { url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png" }
+      var colos = { url: "http://maps.google.com/mapfiles/ms/icons/pink-dot.png" }
+
+      
+      
+      var marker = new google.maps.Marker({
+        position: location, 
+        map: map,
+        icon: colos,
+        animation: google.maps.Animation.DROP
+      });
+
+function distance(lati,longi,lat,lng){
+        return 30;
+        console.log(distance(lati,longi,lat,lng));
+      };
+      
+      var contentstring = v.district;
+
+      
+      
+      
+
+      $("#searching").on("click", function() { marker.setMap(null); });
+
+      var infowindow = new google.maps.InfoWindow({
+        content: contentstring
+      });
+      
+      
+
+      marker.addListener('click', function() {
+        infowindow.open(map, marker);
+        
+        counter++;
+        console.log(counter);
+        
+        if (counter >= 2){
+          infowindow.close(map, marker);
+          counter = 0;
+        }
+
+      });
+      
+
+      
+      
+      
+
+    });
+
+  }
+    
+    
+  </script>
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+   crossorigin="anonymous">
+
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+   crossorigin="anonymous">
+
+  </script>  
+  
+
+   
+  
+  
+  <div class="content" id="abouts">
+    About Page
+    <div id="top"></div>
+    
+    <div class="list-group">
+      <a href="#abut" class="list-group-item list-group-item-action">About</a>
+      <a href="#dev" class="list-group-item list-group-item-action">Developer</a>
+      <a href="#git" class="list-group-item list-group-item-action">Github Repo Link </a>
+    </div>
+    
+    <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+    
+    
+    <div id="abut">
+      <h1> About </h1><br>
+      <h5> This app shell lets you find a place in Chicago that offers free access to techonology such as computer and laptops with wifi and internet acess. The organizations listed also gives you training on how to use computers and how to navigate through the internet. Certain places require you to make appointments so they are readily listed to you just in case along with other information (wifi access, internet access, hours and training). <br><br> There are two search methods that this app uses. One uses it's own API from the Chicago Data Portal and the "Advanced Search" also uses another API endpoint totalling in 2. </h5>
+    </div>
+    <div  id="dev"><br><br><br><br><br><br><br><br>
+      <h1> Developer </h1><br>
+      <h1 class="mdc-typography--headline1">Mohamed Imran Mohamed Siddique</h1>
+      <h5>E-mail: isiddi5@uic.edu</h5>
+      <h5>UIN: 656951860</h5>
+    </div>
+    <div id="git"><br><br><br><br><br><br><br><br>
+      <div> <h1> Github Repo </h1><br>
+        <h5>https://github.com/isiddi5/IT-202-Project-2</h5>
+      </div>
+    </div>
+    
+    
+  </div>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+      
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDa4dMSOASs_iLQnhrPoQ8EZgj2Im_pZ7o&callback=initMap">
+    </script>
+  
+  <script>
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    document.getElementById("myBtn").style.display = "block";
+  } else {
+    document.getElementById("myBtn").style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>
+
+  
+    <script>
+      $(document).ready(function() {
+
+        function hideScreens() {
+          $(".content").hide();
+        }
+
+        $(".nav-link").on("click", function(){
+          hideScreens();
+          var target = $(this).attr("href");
+          $(target).show();
+        });
+
+      });
+    </script>
+
+
+  </body>
+</html>
+
+
+
+
+
