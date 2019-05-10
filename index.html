@@ -445,7 +445,6 @@ var infowindow = new google.maps.InfoWindow({
       var location = {lat: parseFloat(v.latitude), lng: parseFloat(v.longitude) }
 
       
-      var completecolor = { url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png" }
       var colos = { url: "http://maps.google.com/mapfiles/ms/icons/pink-dot.png" }
 
       
@@ -457,12 +456,15 @@ var infowindow = new google.maps.InfoWindow({
         animation: google.maps.Animation.DROP
       });
 
-function distance(lati,longi,lat,lng){
-        return 30;
-        console.log(distance(lati,longi,lat,lng));
+function distance(x,y,z,w){
+        deglen = 110.25;
+        a = x - z;
+        b = y - w;
+        return deglen*(x*x + y*y);
+        
       };
-      
-      var contentstring = v.district;
+      console.log(distance(lati,longi,41.8781,-87.6298));
+      var contentstring = distance(lati,longi,41.8781,-87.6298);
 
       
       
